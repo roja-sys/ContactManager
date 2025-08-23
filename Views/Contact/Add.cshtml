@@ -1,0 +1,19 @@
+@model ContactManager.Models.Contact
+
+<h2>Add Contact</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label>Name</label>
+        <input class="form-control" asp-for="Name" />
+    </div>
+    <div class="mb-3">
+        <label>Email</label>
+        <input class="form-control" asp-for="Email" />
+    </div>
+    <div class="mb-3">
+        <label>Phone</label>
+        <input class="form-control" asp-for="Phone" />
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
