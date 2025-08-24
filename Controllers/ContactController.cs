@@ -1,35 +1,97 @@
+using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using ContactManager.Models; // adjust if your model namespace differs
+using ContactManager.Data;
+using ContactManager.Models;
 
-public class ContactController : Controller
+namespace ContactManager.Controllers
 {
-    private static List<Contact> contacts = new List<Contact>
+    public class ContactsController : Controller
     {
-        new Contact { Id = 1, Name = "Alice", Email = "alice@email.com", Phone = "123-456-7890" },
-        new Contact { Id = 2, Name = "Bob", Email = "bob@email.com", Phone = "987-654-3210" }
-    };
+        private readonly ApplicationDbContext _context;
 
-    public IActionResult Index(string searchString)
-    {
-        var filteredContacts = string.IsNullOrEmpty(searchString)
-            ? contacts
-            : contacts.Where(c => c.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
+        public ContactsController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-        return View(filteredContacts);
-    }
+        // GET: /Contacts
+        public IActionResult Index()
+        {
+            var contacts = _context.Contacts.ToList();
+            return View(contacts);
+        }
 
-    // 👉 Show the form
-    public IActionResult Create()
-    {
-        return View();
-    }
+        // GET: /Contacts/Create
+        public IActionResult Create() => View();
 
-    // 👉 Handle form submission
-    [HttpPost]
-    public IActionResult Create(Contact contact)
-    {
-        contact.Id = contacts.Max(c => c.Id) + 1; // auto-increment ID
-        contacts.Add(contact);
-        return RedirectToAction("Index");
+        // POST: /Contacts/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Contact contact)
+        {
+            if (ModelState.IsValid)
+            {
+                contact.CreatedAt = DateTime.Now;
+                contact.UpdatedAt = DateTime.Now;
+                _context.Contacts.Add(contact);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(contact);
+        }
+
+        // GET: /Contacts/Edit/5
+        public IActionResult Edit(int id)
+        {
+            var contact = _context.Contacts.Find(id);
+            if (contact == null) return NotFound();
+            return View(contact);
+        }
+
+        // POST: /Contacts/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Contact contact)
+        {
+            if (ModelState.IsValid)
+            {
+                contact.UpdatedAt = DateTime.Now;
+                _context.Contacts.Update(contact);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(contact);
+        }
+
+        // GET: /Contacts/Delete/5
+        public IActionResult Delete(int id)
+        {
+            var contact = _context.Contacts.Find(id);
+            if (contact == null) return NotFound();
+            return View(contact);
+        }
+
+        // POST: /Contacts/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var contact = _context.Contacts.Find(id);
+            if (contact != null)
+            {
+                _context.Contacts.Remove(contact);
+                _context.SaveChanges();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: /Contacts/Details/5
+        public IActionResult Details(int id)
+        {
+            var contact = _context.Contacts.Find(id);
+            if (contact == null) return NotFound();
+            return View(contact);
+        }
     }
 }

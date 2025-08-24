@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ContactManager.Models;
+using Microsoft.Extensions.Logging;
 
 namespace ContactManager.Controllers;
 
@@ -15,7 +16,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        return RedirectToAction("Index","Contacts");
     }
 
     public IActionResult Privacy()

@@ -92,3 +92,146 @@ body {
 .btn-secondary:hover {
     background: #5a6268;
 }
+
+
+/* create */
+/* Page background and spacing */
+body {
+    background: #f5f7fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Smooth transition for all inputs and buttons */
+input, select, textarea, .btn {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Validation message styling */
+.text-danger {
+    font-size: 0.875rem;
+    margin-top: 4px;
+    display: block;
+}
+
+/* Button flex container adjustment for responsiveness */
+.d-flex {
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Ensure form container responsiveness */
+@media (max-width: 576px) {
+    .form-container {
+        margin: 20px;
+        padding: 20px;
+    }
+}
+
+/* Subtle hover effect for inputs */
+.form-control:hover {
+    border-color: #28a745;
+}
+
+/* Add focus effect for accessibility */
+.form-control:focus {
+    box-shadow: 0 0 8px rgba(40,167,69,0.4);
+}
+
+/* Optional: Add a slight lift effect on buttons */
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Page title spacing adjustment for small screens */
+@media (max-width: 576px) {
+    .page-title {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+}
+
+/* delete */
+/* Delete Contact Page */
+
+/* Page title specific to Delete page */
+.delete-page h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Confirmation message */
+.delete-page h4 {
+    text-align: center;
+    font-weight: normal;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* Contact info box */
+.delete-page .contact-info {
+    max-width: 500px;
+    margin: 0 auto 25px auto;
+    padding: 15px 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Form buttons container */
+.delete-page form {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Delete button */
+.delete-page .btn-danger {
+    background: #dc3545;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.delete-page .btn-danger:hover {
+    background: #c82333;
+}
+
+/* Cancel button */
+.delete-page .btn-secondary {
+    background: #6c757d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.delete-page .btn-secondary:hover {
+    background: #5a6268;
+}
+
+/* Responsive adjustments for Delete page */
+@media (max-width: 576px) {
+    .delete-page .contact-info {
+        margin: 15px;
+        padding: 15px;
+    }
+
+    .delete-page h2 {
+        font-size: 24px;
+    }
+
+    .delete-page h4 {
+        font-size: 16px;
+    }
+}

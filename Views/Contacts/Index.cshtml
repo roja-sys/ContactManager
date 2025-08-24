@@ -1,0 +1,35 @@
+@model IEnumerable<ContactManager.Models.Contact>
+
+<h2>Contacts List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Notes</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contact in Model)
+        {
+            <tr>
+                <td>@contact.Name</td>
+                <td>@contact.Email</td>
+                <td>@contact.Phone</td>
+                <td>@contact.Address</td>
+                <td>@contact.Notes</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@contact.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@contact.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@contact.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Add New Contact</a>
